@@ -11,18 +11,28 @@
             <tr>
                 <td><p>Наименование</p></td>
                 <td><p>Цена</p></td>
-                <td><p>Кол-во</p></td>
+                <td style='text-align:center; vertical-align:middle'><p>Кол-во</p></td>
                 <td></td>
             </tr>
             {% for p in products %}
                 <tr>
                     <td><p>{{ p.name }}</p></td>
                     <td><p>{{ p.price }}</p></td>
-                    <td><p>{{ p.count }}</p></td>
-                    <td><p><a href="/buy/{{ p.id }}">Купить</a></p></td>
+                    <td style='text-align:center; vertical-align:middle'><p>{{ p.count }}</p></td>
+                    <td><button onclick="buy_action({{ p.count }}, '/buy/{{ p.id }}')">Купить</button></td>
                 </tr>
             {% endfor %}
         </table>
     </div>
+
+    <script>
+        function buy_action(count, href) {
+            if (count === 0) {
+                alert("Покупка невозможна, не осталось товаров");
+            } else {
+                location.href = href;
+            }
+        }
+    </script>
 </body>
 </html>
